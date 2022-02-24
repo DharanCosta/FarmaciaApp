@@ -29,7 +29,7 @@ public class CategoriaControler {
 	@Autowired
 	CategoriaRepository repository;
 	
-	//Get
+	//Get All
 	@GetMapping("/tudo")
 	public ResponseEntity<List<CategoriaModel>> getAll(){
 		List<CategoriaModel> list = repository.findAll();
@@ -42,6 +42,7 @@ public class CategoriaControler {
 		
 	}
 	
+	// Get By Id
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoriaModel> getById(@PathVariable(value = "id") Long id) {
 		return repository.findById(id).map(resp -> ResponseEntity.status(200).body(resp)).orElseGet(() -> {
@@ -65,7 +66,7 @@ public class CategoriaControler {
 		}
 
 		// DELETE
-		@DeleteMapping("/delete/{id}")
+		@DeleteMapping("/{id}")
 		public ResponseEntity<?> delete(@PathVariable Long id) {
 			Optional<CategoriaModel> optional = repository.findById(id);
 
